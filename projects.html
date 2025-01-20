@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project A.S.A.P - Team Projects</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            cursor: none;
+            background: linear-gradient(to bottom right, rgb(88, 28, 135), rgb(0, 0, 0));
+            color: white;
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .custom-cursor {
+                display: none;
+            }
+        }
+
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            z-index: 50;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease-out;
+        }
+
+        .cursor-dot {
+            width: 16px;
+            height: 16px;
+            background-color: rgb(168, 85, 247);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-outline {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgb(168, 85, 247);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease-out;
+        }
+
+        .cursor-outline.pointer {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        .project-card {
+            height: 300px; /* Fixed height for all cards */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+
+        .project-description {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            /* Custom scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(168, 85, 247, 0.5) transparent;
+        }
+
+        /* For Webkit browsers like Chrome/Safari */
+        .project-description::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .project-description::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .project-description::-webkit-scrollbar-thumb {
+            background-color: rgba(168, 85, 247, 0.5);
+            border-radius: 3px;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor cursor-dot"></div>
+    <div class="custom-cursor cursor-outline"></div>
+
+    <!-- Header -->
+    <header class="bg-purple-900/30 backdrop-blur-sm py-6">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="HCLOGO.png" alt="HackClub Logo" class="w-8 md:w-10 h-8 md:h-10">
+                    <span class="text-lg md:text-xl font-bold">Project A.S.A.P</span>
+                </div>
+                <nav>
+                    <a href="index.html" class="text-white hover:text-purple-400 transition-colors">Back to Home</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 py-12">
+        <h1 class="text-3xl md:text-4xl font-bold mb-8">Team Projects</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr" id="projectsGrid">
+            <!-- Projects will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // Custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursors = document.querySelectorAll('.custom-cursor');
+            const outline = cursors[1];
+            
+            cursors.forEach(cursor => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+
+            const target = e.target;
+            const isPointer = window.getComputedStyle(target).cursor === 'pointer';
+            outline.classList.toggle('pointer', isPointer);
+        });
+
+        // Project data - Replace with actual team data
+        // Replace the existing projects array with:
+const projects = [
+    {
+        teamName: "Three Musketeers",
+        projectName: "Personalized Health Tracker",
+        description: "A health tracking system to log, view, and clear health data like BMI, weight, water intake, steps, and more.",
+        githubLink: "https://github.com/accountableessence/friendly-palm-tree/blob/main/"
+    },
+    {
+        teamName: "DUBU DON",
+        projectName: "Expense Tracker",
+        description: "A simple and efficient tool that helps users manage their finances by allowing them to set a monthly budget. Designed to help individuals and families who struggle with tracking expenses.",
+        githubLink: "https://github.com/ajithanjana2005/Smart-Expense-Tracker-with-Budge"
+    },
+    {
+        teamName: "Byte Builders",
+        projectName: "TO-DO List",
+        description: "A simple TO-DO List application implemented in Python which allows users to add tasks and view tasks.",
+        githubLink: "https://github.com/SanaKuriakose/PROJECT-ASAP.git"
+    },
+    {
+        teamName: "Tech Titans",
+        projectName: "Calorie Tracker",
+        description: "A simple Python program for tracking calories and achieving fitness goals.",
+        githubLink: "https://github.com/zeusenpai/calorie_tracker"
+    },
+    {
+        teamName: "Fractulus",
+        projectName: "Fitness Tracking System",
+        description: "A simple console-based fitness tracking system that allows users to log their exercise routines and set fitness goals.",
+        githubLink: "https://github.com/Govindan007/ASAP_hack_club_EVENT.git"
+    },
+    {
+        teamName: "GreySkale",
+        projectName: "Digital Diary & To-Do List",
+        description: "A program for making a window for a digital diary and a to-do list with button-based interface.",
+        githubLink: "https://github.com/anandhakrishnan707/project_asap"
+    },
+    {
+        teamName: "Bamboo boys",
+        projectName: "Budget Manager",
+        description: "A project for managing personal and household budgets.",
+        githubLink: "https://github.com/OpenKnowledgeBase/mitzi-nohara-house-wife"
+    },
+    {
+        teamName: "The catalyst crew",
+        projectName: "Rock Paper Scissors",
+        description: "A simple implementation of the classic Rock, Paper, Scissors game.",
+        githubLink: "https://github.com/AbnaBasheer/Rock-paper-scissor-game/blob/main"
+    },
+    {
+        teamName: "PySquad",
+        projectName: "Hospital Patient Management",
+        description: "A system for managing patient data efficiently in busy hospital environments.",
+        githubLink: "https://github.com/evelin0125/tasks.git"
+    }
+];
+
+        // Populate projects
+        projects.forEach(project => {
+    const card = document.createElement('div');
+    card.className = 'project-card bg-purple-900/30 rounded-lg p-6 transition-all duration-300';
+    card.innerHTML = `
+        <div>
+            <h2 class="text-xl font-bold mb-2 text-purple-400">${project.teamName}</h2>
+            <h3 class="text-white font-medium mb-4">${project.projectName}</h3>
+            <div class="project-description">
+                <p class="text-gray-300 text-sm">${project.description}</p>
+            </div>
+        </div>
+        <a href="${project.githubLink}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="inline-flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors w-full justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>View on GitHub</span>
+        </a>
+    `;
+    projectsGrid.appendChild(card);
+});
+    </script>
+</body>
+</html>
